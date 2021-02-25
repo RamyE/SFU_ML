@@ -444,12 +444,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     print(args.allow_resizing, args.ignore_platform)
-    if not sys.platform.startswith('win'):
-        print("Unsupported Platform. This application is tested on Windows Only")
-        if args.ignore_platform:
-            print("The application will continue to run but may crash or not function as intended")
-        else:
-            exit(1)
+    #if not sys.platform.startswith('win'):
+        #print("Unsupported Platform. This application is tested on Windows Only")
+        #if args.ignore_platform:
+            #print("The application will continue to run but may crash or not function as intended")
+        
+        #else:
+            #exit(1)
     
     app = QApplication(sys.argv)
 
