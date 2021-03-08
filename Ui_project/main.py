@@ -468,24 +468,19 @@ class MainWindow(QMainWindow):
         if newValue is True:
             self.logger.log("", special="ProcessingStarted")
 
-
     def __del__(self):
         if self.b_serialConnected:
             self.port.close()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='RPi HIL Communication GUI')
-    parser.add_argument('--ignore-platform', default=False, action='store_true')
     parser.add_argument('--allow-resizing', default=False, action='store_true')
     parser.add_argument('--larger-font', default=False, action='store_true')
     args = parser.parse_args()
 
     if not sys.platform.startswith('win'):
-        print("Unsupported Platform. This application is tested on Windows Only")
-        if args.ignore_platform:
-            print("The application will continue to run but may crash or not function as intended")
-        else:
-            exit(1)
+        print("This application is tested on Windows Only")
+        print("The application will continue to run but may crash or not function as intended, please report any issues you have")
     
     app = QApplication(sys.argv)
 
