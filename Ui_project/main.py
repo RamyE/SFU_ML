@@ -25,7 +25,7 @@ import argparse
 from subprocess import check_output, CalledProcessError
 import os
 
-APP_VERSION = "1.0.5"
+APP_VERSION = "1.1.0"
 
 DISABLE_MODEL_TRASFER = True
 
