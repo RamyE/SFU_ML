@@ -72,8 +72,8 @@ class Executer:
     def execute(self, labCode, inputDataFrame, outputFolder, inputFields=None, outputField=None, progressBar=None, model=None):
         # self.logger.disableLogging()
 
-        self.serialPort.flushInput()
-        self.serialPort.flushOutput()
+        self.serialPort.reset_input_buffer()
+        self.serialPort.reset_output_buffer()
         startTime = time.time()
 
         # progressBar = None
@@ -278,7 +278,7 @@ class Executer:
                 QCoreApplication.processEvents()
             # t = time.time()
             try:
-                self.serialPort.flushInput()
+                self.serialPort.reset_input_buffer()
                 self.serialPort.write(sendBuffer)
             except SerialTimeoutException:
                 self.serialPort.flushOutput()

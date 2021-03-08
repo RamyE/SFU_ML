@@ -166,7 +166,8 @@ class MainWindow(QMainWindow):
                 currentPortName = self.serialPortComboBox.currentText()
                 write_timeout = 4 if DISABLE_MODEL_TRASFER else 240
                 self.port = serial.Serial(currentPortName, 115200 , timeout=1, write_timeout=write_timeout, bytesize=8, parity='N', stopbits=1)
-                self.port.set_buffer_size(rx_size = 10**3, tx_size = 10**8)
+                if sys.platform.startswith('win'):
+                    self.port.set_buffer_size(rx_size = 10**3, tx_size = 10**8)
                 self.serialPortComboBox.setItemText(self.serialPortComboBox.currentIndex(), currentPortName + " (CONNECTED)")
                 self.connectDisconnectSerialButton.setText("Disconnect")
                 self.b_serialConnected = True
