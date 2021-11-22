@@ -15,7 +15,7 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 
-# Importing the dataset
+# Importing the dataset (no header)
 df0 = pd.read_csv("EMG\EMG_0.csv", header=None)
 df1 = pd.read_csv("EMG\EMG_1.csv", header=None)
 df2 = pd.read_csv("EMG\EMG_2.csv", header=None)
@@ -50,6 +50,52 @@ plt.title('3 - okay')
 
 plt.show()
 
+
+#%%
+
+# Creating a binary dataset
+# Class 0: Closed Fist
+# Class 1: Open Hand
+dataset_binary = dataset[dataset.iloc[:, -1].isin([0,2])]
+dataset_binary.iloc[:, -1].replace(to_replace=2, value=1, inplace=True)
+# Split features and targets - X: Features, y: Targets
+X_binary = dataset_binary.iloc[:, :-1]
+y_binary = dataset_binary.iloc[:, -1].values
+
+# Splitting the dataset into the Training set and Test set
+from sklearn.model_selection import train_test_split
+X_train_binary, X_test_binary, y_train_binary, y_test_binary = train_test_split(X_binary, y_binary, test_size=0.2)
+
+# Save Test Set
+np.savetxt("features_emg_test_binary.csv", X_test, delimiter=",")
+np.savetxt("targets_emg_test_binary.csv", y_test, delimiter=",")
+
+# Standardize features by removing the mean and scaling to unit variance
+from sklearn.preprocessing import StandardScaler
+X_train_binary = pd.DataFrame(StandardScaler().fit_transform(X_train_binary))
+X_test_binary = pd.DataFrame(StandardScaler().fit_transform(X_test_binary))
+
+
+
+fig = plt.figure()
+plt.subplot(1, 2, 1)
+plt.imshow(img0)
+plt.axis('off')
+plt.title('0 - rock')
+plt.subplot(1, 2, 2)
+plt.imshow(img2)
+plt.axis('off')
+plt.title('1 - paper')
+plt.show()
+
+
+#%%
+
+# Multi-class dataset
+# Class 0: Closed Fist
+# Class 1: V sign
+# Class 2: Open Hand
+# Class 3: OK gesture
 # Split features and targets - X: Features, y: Targets
 X = dataset.iloc[:, :-1]
 y = dataset.iloc[:, -1].values
@@ -66,6 +112,16 @@ np.savetxt("targets_emg_test.csv", y_test, delimiter=",")
 from sklearn.preprocessing import StandardScaler
 X_train = pd.DataFrame(StandardScaler().fit_transform(X_train))
 X_test = pd.DataFrame(StandardScaler().fit_transform(X_test))
+
+#%%
+
+
+
+
+
+
+#%%
+
 
 # Some Functions for Showing the Classifier Performance
 from sklearn.metrics import classification_report
