@@ -129,7 +129,7 @@ su pi -c 'python3 /home/pi/SFU_ML/RPi_Script/main.py' &
 ```
 4. Save the file and exit. In nano, to exit, type Ctrl-x, then Y, and then press Enter.
 
-# 2. Set up and Run the GUI
+# 2. Set up and Run the GUI (Only on your PC, not the Raspberry Pi)
 
 ## 2.1. Setup the Virtual Environment
 This section covers installing a python interpreter and package installations in a virtual environment, rather than system-wide. We will use Anaconda here, however, if you have an alternative that you are using, you may continue to use that. To setup the virtual environment and install the required dependencies, follow these steps:
